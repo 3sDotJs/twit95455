@@ -1,9 +1,10 @@
 import requests
 import random
+import time
 
 
 # Method Request Twitt
-def Twitt(Token,Counter):
+def Twitt(Token,Counter,sleep):
     with requests.Session() as c:
         Num = 1
         activate = True
@@ -28,6 +29,7 @@ def Twitt(Token,Counter):
             else:
                 print('Sorry, it was not Twitter!')
                 activate = False
+            time.sleep(5)
 
 
 
@@ -35,10 +37,15 @@ def Twitt(Token,Counter):
 try:
     Token = str( input("Plase auth_token: ") )
     Counter = int( input("Plase Counter: ") )
+    sleep = int( input("Snooze duration: Example => 5 or 6 (second) ") )
     if Counter >= 201 or Counter <= 0:
         print("The entered number is greater than 200 or less than 0, so the value 50 will be set")
         Counter = 50
+
+    if sleep >= 60 or Counter <= 0:
+        print("Snooze time must be more than 0 and not less than 60 seconds")
+        sleep = 5
 except:
     print("Auth_token must be text and Counter be a number")
 else:
-    Twitt(Token,Counter)
+    Twitt(Token,Counter,sleep)
